@@ -31,9 +31,10 @@ shap_values = explainer.shap_values(X_test[start_index:end_index])
 X_test[start_index:end_index]
 
 # %% Investigating the values (classification problem)
-# class 0 = contribution to class 1
-# class 1 = contribution to class 2
-print(shap_values[0].shape)
+# shap >= 0.45 returns one array of shape (samples, features, classes)
+# [..., 0] = contribution to class 0 (no stroke)
+# [..., 1] = contribution to class 1 (stroke)
+print(shap_values.shape)
 shap_values
 
 # %% >> Visualize local predictions
@@ -42,10 +43,12 @@ shap.initjs()
 prediction = rf.predict(X_test[start_index:end_index])[0]
 print(f"The RF predicted: {prediction}")
 shap.force_plot(explainer.expected_value[1],
-                shap_values[1],
+                shap_values[..., 1],
                 X_test[start_index:end_index]) # for values
 
 # %% >> Visualize global features
-# Feature summary
-shap.summary_plot(shap_values, X_test)
+# Feature summary needs SHAP values for the whole test set
+shap_values_test = explainer.shap_values(X_test)
+shap.summary_plot([shap_values_test[..., i] for i in range(shap_values_test.shape[-1])],
+                  X_test)
 
