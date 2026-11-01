@@ -218,3 +218,7 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Datasets (download locally, see data/README.md)
+data/*
+!data/README.md
