@@ -1,0 +1,23 @@
+[project]
+name = "wqf7009-assignment1"
+version = "0.1.0"
+description = "WQF7009 Explainable AI Assignment 1: Using SHAP for Stroke Prediction Model"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+dependencies = [
+    "imbalanced-learn>=0.12",
+    "matplotlib>=3.8",
+    "numpy>=1.26",
+    "pandas>=2.1",
+    "scikit-learn>=1.4",
+    "shap>=0.45",
+]
+
+[project.optional-dependencies]
+# 01_interpretable_models.py, 02_lime.py
+interpret = ["interpret>=0.6"]
+# 04_counterfactuals.py
+counterfactuals = ["dice-ml>=0.11"]
+# 05_lrp.py
+lrp = ["torch>=2.2", "torchvision>=0.17"]
