@@ -8,7 +8,8 @@ import numpy as np
 import matplotlib.pyplot as plt
 import torch.optim as optim
 import copy
-import pandas as pd 
+import pandas as pd
+from utils import DATA_DIR
 
 # Set GPU device
 print(torch.cuda.is_available())
@@ -16,8 +17,8 @@ device = torch.device("cuda:0")
 
 
 # %% Load data
-TRAIN_ROOT = "data/brain_mri/training"
-TEST_ROOT = "data/brain_mri/testing"
+TRAIN_ROOT = DATA_DIR / "brain_mri" / "training"
+TEST_ROOT = DATA_DIR / "brain_mri" / "testing"
 train_dataset = torchvision.datasets.ImageFolder(root=TRAIN_ROOT)
 test_dataset = torchvision.datasets.ImageFolder(root=TRAIN_ROOT)
 
@@ -26,7 +27,7 @@ test_dataset = torchvision.datasets.ImageFolder(root=TRAIN_ROOT)
 class CNNModel(nn.Module):
     def __init__(self):
         super(CNNModel, self).__init__()
-        self.vgg16 = models.vgg16(pretrained=True) 
+        self.vgg16 = models.vgg16(weights=models.VGG16_Weights.IMAGENET1K_V1)
 
         # Replace output layer according to our problem
         in_feats = self.vgg16.classifier[6].in_features 
@@ -170,10 +171,11 @@ def apply_lrp_on_vgg16(model, image):
     # >>> Step 3: Replace last layer with one-hot-encoding
     output_activation = activations[-1].detach().cpu().numpy()
     max_activation = output_activation.max()
-    one_hot_output = [val if val == max_activation else 0 
-                        for val in output_activation[0]]
+    # Output is (1, classes, 1, 1) after dense_to_conv, keep that shape
+    one_hot_output = np.where(output_activation == max_activation,
+                              output_activation, 0)
 
-    activations[-1] = torch.FloatTensor([one_hot_output]).to(device)
+    activations[-1] = torch.FloatTensor(one_hot_output).to(device)
 
     # >>> Step 4: Backpropagate relevance scores
     relevances = [None] * n_layers + [activations[-1]]
