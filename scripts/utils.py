@@ -1,14 +1,18 @@
-import pandas as pd 
+from pathlib import Path
+import pandas as pd
 # Makes sure we see all columns
 pd.set_option('display.max_columns', None)
 from sklearn.model_selection import train_test_split
 from imblearn.over_sampling import RandomOverSampler
 
+# Resolve data relative to the repo, not the current working directory
+DATA_DIR = Path(__file__).resolve().parent.parent / "data"
+
 class DataLoader():
     def __init__(self):
         self.data = None
 
-    def load_dataset(self, path="data/healthcare-dataset-stroke-data.csv"):
+    def load_dataset(self, path=DATA_DIR / "healthcare-dataset-stroke-data.csv"):
         self.data = pd.read_csv(path)
 
     def preprocess_data(self):
@@ -19,7 +23,9 @@ class DataLoader():
                             "Residence_type",
                             "smoking_status"]
         encoded = pd.get_dummies(self.data[categorical_cols], 
-                                prefix=categorical_cols)
+                                prefix=categorical_cols,
+                                # pandas >= 2 defaults to bool, keep 0/1 ints
+                                dtype=int)
 
         # Update data with new columns
         self.data = pd.concat([encoded, self.data], axis=1)
