@@ -21,3 +21,5 @@ interpret = ["interpret>=0.6"]
 counterfactuals = ["dice-ml>=0.11"]
 # 05_lrp.py
 lrp = ["torch>=2.2", "torchvision>=0.17"]
+# Everything above
+all = ["wqf7009-assignment1[interpret,counterfactuals,lrp]"]
