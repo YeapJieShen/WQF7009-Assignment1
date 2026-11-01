@@ -6,7 +6,7 @@ WQF7009 Explainable Artificial Intelligence Assignment 1: Using SHAP for Stroke 
 ```bash
 python -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
-pip install -e .            # add extras as needed, e.g. pip install -e ".[interpret,counterfactuals,lrp]"
+pip install -e .            # add extras as needed, or pip install -e ".[all]" for everything
 ```
 
 Download the [Stroke Prediction Dataset](https://www.kaggle.com/fedesoriano/stroke-prediction-dataset)
