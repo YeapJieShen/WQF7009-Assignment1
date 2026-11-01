@@ -1,0 +1,30 @@
+name: Assignment task
+description: Track work on an assignment task
+title: "[Task N] "
+labels: ["task"]
+body:
+  - type: dropdown
+    id: task
+    attributes:
+      label: Task
+      options:
+        - "Task 1: Exploratory Data Analysis"
+        - "Task 2: Create SHAP explainer"
+        - "Task 3: Local explainer (force plot)"
+        - "Task 4: Global explainer (summary plot)"
+        - "Task 5: Slides (data scientist / doctor / patient)"
+        - "Task 6: Deep SHAP or Kernel SHAP on another black-box model"
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: What needs to be done?
+    validations:
+      required: true
+  - type: textarea
+    id: done
+    attributes:
+      label: Definition of done
+      placeholder: "- [ ] ..."
