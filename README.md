@@ -14,5 +14,5 @@ and place `healthcare-dataset-stroke-data.csv` in `data/` (see [data/README.md](
 
 ## Credits
 
-The starter scripts (`00_`–`05_*.py`, `utils.py`) are adapted from
+The starter scripts in `scripts/` are adapted from
 [deepfindr/xai-series](https://github.com/deepfindr/xai-series).
