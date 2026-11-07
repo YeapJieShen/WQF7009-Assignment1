@@ -1,3 +1,7 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
 [project]
 name = "wqf7009-assignment1"
 version = "0.1.0"
@@ -22,7 +26,28 @@ interpret = ["interpret>=0.6", "lime>=0.2"]
 counterfactuals = ["dice-ml>=0.11"]
 # 05_lrp.py
 lrp = ["torch>=2.2", "torchvision>=0.17"]
-# Running notebooks/
-notebook = ["ipykernel>=6", "nbconvert>=7"]
+# Running notebooks/ (03_deep_shap_mlp.ipynb needs torch)
+notebook = ["ipykernel>=6", "nbconvert>=7", "scipy>=1.11", "torch>=2.2"]
+# Linting and formatting
+dev = ["ruff>=0.6"]
 # Everything above
-all = ["wqf7009-assignment1[interpret,counterfactuals,lrp,notebook]"]
+all = ["wqf7009-assignment1[interpret,counterfactuals,lrp,notebook,dev]"]
+
+# Shared helpers for the notebooks: src/stroke_shap
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 110
+target-version = "py310"
+# Provided course scripts are kept as given
+extend-exclude = ["scripts"]
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "N", "UP", "B", "SIM", "D"]
+# N803/N806: X for predictor matrices is the scikit-learn convention
+ignore = ["N803", "N806", "D105", "D107"]
+pydocstyle.convention = "google"
+
+[tool.ruff.lint.per-file-ignores]
+"notebooks/*" = ["D", "E402"]
