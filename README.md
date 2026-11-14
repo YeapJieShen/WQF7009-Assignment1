@@ -1,7 +1,14 @@
-# WQF7009-Assignment1
-WQF7009 Explainable Artificial Intelligence Assignment 1: Using SHAP for Stroke Prediction Model
+# WQF7009-Assignments
+WQF7009 Explainable Artificial Intelligence assignments:
 
-## Dataset: [Stroke Prediction Dataset](https://www.kaggle.com/fedesoriano/stroke-prediction-dataset) (kaggle.com)
+1. [Assignment 1](#assignment-1-shap-on-stroke-prediction): Using SHAP for Stroke Prediction Model
+2. [Assignment 2](#assignment-2-xai-on-mri-data): XAI on MRI Data (LRP and Grad-CAM)
+
+## Assignment 1: SHAP on Stroke Prediction
+
+Dataset: [Stroke Prediction Dataset](https://www.kaggle.com/fedesoriano/stroke-prediction-dataset) (kaggle.com)
+
+The submitted version is tagged [`a1-submitted`](https://github.com/YeapJieShen/WQF7009-Assignments/tree/a1-submitted).
 
 ### Context
 According to the World Health Organization (WHO) stroke is the 2nd leading cause of death globally, responsible for approximately 11% of total deaths.
@@ -23,7 +30,7 @@ This dataset is used to predict whether a patient is likely to get stroke based 
 
 \*"Unknown" in `smoking_status` means that the information is unavailable for this patient.
 
-## Tasks
+### Tasks
 
 1. **Exploratory Data Analysis**
    - Step 1: Download the GitHub codes
@@ -37,6 +44,24 @@ This dataset is used to predict whether a patient is likely to get stroke based 
    - As patient
 6. Create Deep SHAP or Kernel SHAP as an explainer and explain a chosen black box model different from Task 2
 
+## Assignment 2: XAI on MRI Data
+
+Dataset: [Brain Tumor Classification (MRI)](https://github.com/SartajBhuvaji/Brain-Tumor-Classification-DataSet) (github.com)
+
+### Context
+Brain tumors vary widely in size and location, and MRI scans are examined manually by radiologists, which is
+slow and error-prone. Deep learning models (CNN, transfer learning) can classify MRI scans into four classes:
+glioma tumor, meningioma tumor, pituitary tumor and no tumor.
+
+### Tasks
+
+1. Download the dataset
+2. Add the `training` and `testing` folders under `data/brain_mri`
+3. Based on `05_lrp.py`, develop LRP and another XAI method of choice (Grad-CAM)
+4. Using LRP and Grad-CAM, explain the brain tumor prediction model:
+   - As a doctor explaining the diagnosis to a patient
+   - As a data scientist explaining to a doctor
+
 ## Setup
 
 ```bash
@@ -46,7 +71,10 @@ pip install -e .            # add extras as needed, or pip install -e ".[all]" f
 ```
 
 Download the [Stroke Prediction Dataset](https://www.kaggle.com/fedesoriano/stroke-prediction-dataset)
-and place `healthcare-dataset-stroke-data.csv` in `data/` (see [data/README.md](data/README.md)).
+and place `healthcare-dataset-stroke-data.csv` in `data/`. For Assignment 2, download the
+[Brain Tumor Classification dataset](https://github.com/SartajBhuvaji/Brain-Tumor-Classification-DataSet)
+and place its `Training` and `Testing` folders in `data/brain_mri/` as `training` and `testing`
+(see [data/README.md](data/README.md)).
 
 ## Credits
 

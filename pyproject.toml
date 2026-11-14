@@ -3,9 +3,9 @@ requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "wqf7009-assignment1"
+name = "wqf7009-assignments"
 version = "0.1.0"
-description = "WQF7009 Explainable AI Assignment 1: Using SHAP for Stroke Prediction Model"
+description = "WQF7009 Explainable AI assignments: SHAP on stroke prediction, LRP and Grad-CAM on brain MRI"
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
@@ -31,7 +31,7 @@ notebook = ["ipykernel>=6", "nbconvert>=7", "scipy>=1.11", "torch>=2.2"]
 # Linting and formatting
 dev = ["ruff>=0.6"]
 # Everything above
-all = ["wqf7009-assignment1[interpret,counterfactuals,lrp,notebook,dev]"]
+all = ["wqf7009-assignments[interpret,counterfactuals,lrp,notebook,dev]"]
 
 # Shared helpers for the notebooks: src/stroke_shap
 [tool.setuptools.packages.find]
